@@ -108,8 +108,8 @@ class FakeModelLoader(object):
                     if hasattr(model, field):
                         delattr(model, field)
             model._fields = ori["_fields"]
-
-        for key in list(self.env.registry.models.keys()):
+        all_models = tuple(self.env.registry.models.items())
+        for key, _model in all_models:
             if key not in self._original_registry:
                 del self.env.registry.models[key]
 
