@@ -61,11 +61,3 @@ class TestMixin(SavepointCase):
 
         self.assertNotIn("res.partner.extra", self.env.registry)
         self.assertNotIn("test_char", self.env["res.partner"]._fields)
-
-        loader.update_registry([ResPartner, ResPartnerExtra])
-        self.assertIn("res.partner.extra", self.env.registry)
-        self.assertIn("test_char", self.env["res.partner"]._fields)
-
-        loader.restore_registry()
-        self.assertNotIn("res.partner.extra", self.env.registry)
-        self.assertNotIn("test_char", self.env["res.partner"]._fields)
