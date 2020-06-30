@@ -14,7 +14,7 @@ class TestMixin(SavepointCase):
         super(TestMixin, cls).setUpClass()
         cls.loader = FakeModelLoader(cls.env, cls.__module__)
         cls.loader.backup_registry()
-        from .models import ResPartner
+        from .models.res_partner import ResPartner
 
         cls.loader.update_registry((ResPartner,))
 

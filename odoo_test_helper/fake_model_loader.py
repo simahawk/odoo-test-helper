@@ -71,12 +71,13 @@ class FakeModelLoader(object):
     def update_registry(self, odoo_models):
         # Ensure that fake model are in your module
         # If you test are re-using fake model from an other module
-        # the following code will inject it like it was in your module
+            # the following code will inject it like it was in your module
 
+        import pdb; pdb.set_trace()
         for model in odoo_models:
             if model not in module_to_models[self._module_name]:
                 module_to_models[self._module_name].append(model)
-            if model not in self._original_registry:
+            if model._name not in self._original_registry:
                 self._new_models.append(model)
 
         with mock.patch.object(self.env.cr, "commit"):
@@ -89,6 +90,7 @@ class FakeModelLoader(object):
             )
 
     def restore_registry(self):
+        import pdb; pdb.set_trace()
         for key in self._original_registry:
             ori = self._original_registry[key]
             model = self.env.registry[key]
@@ -101,6 +103,7 @@ class FakeModelLoader(object):
                         delattr(model, field)
             model._fields = ori["_fields"]
         all_models = tuple(self.env.registry.models.items())
+        import pdb; pdb.set_trace()
 
         for key, _model in all_models:
             if key not in self._original_registry:

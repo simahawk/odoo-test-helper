@@ -12,7 +12,8 @@ class TestMixin(SavepointCase):
     def test_update_and_restore(self):
         loader = FakeModelLoader(self.env, self.__module__)
         loader.backup_registry()
-        from .models import ResPartner, ResPartnerExtra
+        from .models.res_partner import ResPartner
+        from .models.res_partner_extra import ResPartnerExtra
 
         self.assertNotIn("res.partner.extra", self.env.registry)
         self.assertNotIn("test_char", self.env["res.partner"]._fields)
@@ -32,7 +33,7 @@ class TestMixin(SavepointCase):
         self.assertNotIn("res.partner.extra", self.env.registry)
         self.assertNotIn("test_char", self.env["res.partner"]._fields)
 
-        from .models import ResPartner
+        from .models.res_partner import ResPartner
 
         loader.update_registry([ResPartner])
 
@@ -50,7 +51,7 @@ class TestMixin(SavepointCase):
         self.assertNotIn("res.partner.extra", self.env.registry)
         self.assertNotIn("test_char", self.env["res.partner"]._fields)
 
-        from .models import ResPartnerExtra
+        from .models.res_partner_extra import ResPartnerExtra
 
         loader.update_registry([ResPartnerExtra])
 

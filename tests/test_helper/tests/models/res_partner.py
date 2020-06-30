@@ -9,10 +9,3 @@ from odoo import fields, models
 class ResPartner(models.Model):
     _inherit = ["res.partner", "test.mixin"]
     _name = "res.partner"
-
-
-class ResPartnerExtra(models.Model):
-    _name = "res.partner.extra"
-
-    partner_id = fields.Many2one("res.partner", "Partner")
-    extra = fields.Char()
